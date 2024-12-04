@@ -19,6 +19,10 @@ export default {
                 ...colors,
                 primary: '#F9332B',
                 secondary: '#795EFE'
+            },
+            boxShadow: {
+                '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
+                '4xl': '0 80px 105px -15px rgba(0, 0, 0, 0.3)'
             }
         }
     },
