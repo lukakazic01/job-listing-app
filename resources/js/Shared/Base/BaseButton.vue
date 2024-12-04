@@ -79,7 +79,7 @@ const {
     }
 
     &.btn-outline {
-        @apply bg-white text-black border-primary border text-primary;
+        @apply bg-white border-primary border text-primary;
 
         &:hover {
             @apply text-white bg-primary;
