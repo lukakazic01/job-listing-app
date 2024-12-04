@@ -1,7 +1,16 @@
 <template>
     <div class="flex flex-col gap-2">
         <label v-if="label" :for="name">{{ label }} <span v-if="required" class="text-red-500">*</span></label>
-        <input class="border-gray-200 outline-none border rounded p-2" :name="name" :id="name" :type="type" v-model="value" :disabled="disabled" />
+        <input
+            class="border-gray-200 outline-none border rounded p-2"
+            v-model="value"
+            :class="[disabled && 'cursor-not-allowed bg-gray-100', error && 'border-red-500']"
+            :id="name"
+            :name
+            :type
+            :disabled
+            :placeholder
+        />
         <p v-if="error" class="text-red-500 text-xs">{{ error }}</p>
     </div>
 </template>
@@ -13,7 +22,8 @@ const {
     required = true,
     error = '',
     type = 'text',
-    disabled = false
+    disabled = false,
+    placeholder
 } = defineProps<{
     label?: string
     name?: string
@@ -21,6 +31,7 @@ const {
     error?: string
     type?: string
     disabled?: boolean
+    placeholder: string
 }>()
 const [value, modifiers] = defineModel<number | string, 'number' | 'trim'>({
     set(v) {

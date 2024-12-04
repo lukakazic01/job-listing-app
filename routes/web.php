@@ -9,4 +9,5 @@ Route::get('/', function () {
 });
 
 //Applicant Auth
-ROute::get('/register-applicant', [AuthApplicantController::class, 'create'])->name('register-applicant');
+Route::get('/register-applicant', [AuthApplicantController::class, 'create'])->name('register-applicant');
+Route::post('/register-applicant', [AuthApplicantController::class, 'store'])->name('register-applicant');
