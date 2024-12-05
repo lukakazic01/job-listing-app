@@ -4,6 +4,8 @@ import '../css/app.css'
 import { createApp, h } from 'vue'
 import { createInertiaApp, Link } from '@inertiajs/vue3'
 import Layout from './Shared/Layout.vue'
+import PrimeVue from 'primevue/config'
+import Aura from '@primevue/themes/aura'
 
 createInertiaApp({
     resolve: async (name) => {
@@ -16,6 +18,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .component('Link', Link)
             .use(plugin)
+            .use(PrimeVue, { theme: { preset: Aura } })
             .mount(el)
     }
 })

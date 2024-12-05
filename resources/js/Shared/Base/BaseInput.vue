@@ -31,7 +31,7 @@ const {
     error?: string
     type?: string
     disabled?: boolean
-    placeholder: string
+    placeholder?: string
 }>()
 const [value, modifiers] = defineModel<number | string, 'number' | 'trim'>({
     set(v) {
