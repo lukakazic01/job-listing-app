@@ -36,7 +36,7 @@
                 <p class="text-xl text-primary font-bold">Podaci za pristup</p>
                 <BaseInput label="Email" v-model="form.email" :error="form.errors.email" />
                 <BaseInput label="Šifra" v-model="form.password" :error="form.errors.password" />
-                <BaseInput label="Ponovi šifru" v-model="form.confirm" :error="form.errors.confirm" />
+                <BaseInput label="Ponovi šifru" v-model="form.confirmed" :error="form.errors.confirmed" />
                 <BaseButton :loading="form.processing" type="submit" class="w-full">Submit</BaseButton>
             </form>
         </div>
@@ -70,7 +70,7 @@ const form = useForm({
     companySize: '',
     email: '',
     password: '',
-    confirm: ''
+    confirmed: ''
 })
 
 const register = () => {
