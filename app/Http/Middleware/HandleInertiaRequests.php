@@ -2,6 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\City;
+use App\Models\CompanySize;
+use App\Models\Industry;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -36,7 +39,10 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            //
+            //TODO: Find a better way to do this
+            'industries' => Industry::all()->map(fn ($industry) => ['value' => $industry->id, 'label' => $industry->name]),
+            'cities' => City::all()->map(fn ($city) => ['value' => $city->id, 'label' => $city->name]),
+            'companySizes' => CompanySize::all()->map(fn ($companySize) => ['value' => $companySize->id, 'label' => $companySize->size])
         ]);
     }
 }

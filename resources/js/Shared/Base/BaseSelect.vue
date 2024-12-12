@@ -1,15 +1,16 @@
 <template>
     <div class="flex flex-col gap-2">
-        <label v-if="props.label">
-            {{ props.label }}
-            <span v-if="props.required" class="text-red-500">*</span>
+        <label v-if="label">
+            {{ label }}
+            <span v-if="required" class="text-red-500">*</span>
         </label>
         <div class="w-full relative select" :class="[!options && 'loading']">
             <Select
-                :id="props.name"
-                :placeholder="props.placeholder || props.label"
+                :id="name"
+                :filter
+                :name
+                :placeholder="placeholder || label"
                 v-model="value"
-                :name="props.name"
                 :options="options"
                 :disabled="!options || !options.length"
                 :data-error="error || undefined"
@@ -33,13 +34,22 @@ interface Option {
     value: string
 }
 
-const props = defineProps<{
+const {
+    name,
+    label,
+    placeholder,
+    required = false,
+    options,
+    error,
+    filter = false
+} = defineProps<{
     name: string
     label?: string
     placeholder?: string
     required?: boolean
     options: Option[]
     error?: string
+    filter?: boolean
 }>()
 const [value, modifiers] = defineModel<number | string | null, 'number'>({
     set(v) {

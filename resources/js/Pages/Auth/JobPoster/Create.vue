@@ -16,14 +16,20 @@
                 </div>
                 <BaseInput label="PIB" v-model="form.pib" :error="form.errors.pib" />
                 <BaseInput label="Matični broj" v-model="form.registrationNumber" :error="form.errors.registrationNumber" />
-                <BaseSelect name="Industrija" v-model="form.industry" label="Industry" required :options="industries" />
+                <BaseSelect filter name="Industrija" v-model="form.industry" label="Industry" required :options="$page.props.industries" />
                 <BaseInput label="Telefon" v-model="form.phoneNumber" :error="form.errors.phoneNumber" />
                 <BaseInput label="Država" v-model="form.country" :error="form.errors.coutry" />
                 <BaseInput label="Poštanski broj" v-model="form.postalCode" :error="form.errors.postalCode" />
-                <BaseInput label="Grad" v-model="form.city" :error="form.errors.city" />
+                <BaseSelect filter name="city" label="Grad" v-model="form.city" :error="form.errors.city" :options="$page.props.cities" />
                 <BaseInput label="Adresa kompanije" v-model="form.companyAddress" :error="form.errors.companyAddress" />
                 <p class="text-xl text-primary font-bold">Dodatne informacije</p>
-                <BaseSelect name="Veličina kompanije" v-model.number="form.industry" label="Odaberite veličinu kompanije" required :options="industries" />
+                <BaseSelect
+                    name="Veličina kompanije"
+                    v-model.number="form.companySize"
+                    label="Odaberite veličinu kompanije"
+                    required
+                    :options="$page.props.companySizes"
+                />
                 <p class="text-xl text-primary font-bold">Lični podaci</p>
                 <BaseInput label="Ime" v-model="form.ownerName" :error="form.errors.ownerName" />
                 <BaseInput label="Prezime" v-model="form.ownerLastName" :error="form.errors.ownerLastName" />
@@ -43,12 +49,11 @@ import BaseButton from '../../../Shared/Base/BaseButton.vue'
 import { useForm } from '@inertiajs/vue3'
 import BaseSelect from '../../../Shared/Base/BaseSelect.vue'
 import BaseRadio from '../../../Shared/Base/BaseRadio.vue'
-import { ref } from 'vue'
 
 defineOptions({
     layout: null
 })
-const industries = ref([{ label: 'Auto', value: '123' }])
+
 const form = useForm({
     companyName: '',
     pib: '',
@@ -62,7 +67,7 @@ const form = useForm({
     companyAddress: '',
     ownerName: '',
     ownerLastName: '',
-    comnpanySize: '',
+    companySize: '',
     email: '',
     password: '',
     confirm: ''
