@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\CompanySize;
+use App\Models\City;
 use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
@@ -33,11 +33,11 @@ class ScrapeWebsite extends Command
         $response = $client->request('GET', 'https://accounts.hrlab.rs/register');
         $html = $response->getBody()->getContents();
         $crawler = new Crawler($html);
-        $companySizes = $crawler->filter('#registration_form_employeeCountOption')->children()->each(function (Crawler $node) {
-            $value = ["size" => $node->text()];
-            if ($value["size"] !== "Izaberi") return $value;
+        $companySizes = $crawler->filter('#registration_form_city')->children()->each(function (Crawler $node) {
+            $value = ["name" => $node->text()];
+            if ($value["name"] !== "Izaberi") return $value;
         });
-        $filtered = array_filter($companySizes, fn ($size) => $size !== null);
-        CompanySize::insert($filtered);
+        $filtered = array_filter($companySizes, fn ($name) => $name !== null);
+        City::insert($filtered);
     }
 }
