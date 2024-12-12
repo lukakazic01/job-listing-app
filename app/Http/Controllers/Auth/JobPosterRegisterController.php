@@ -33,19 +33,19 @@ class JobPosterRegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         $jobPoster = JobPoster::create([
-            'companyName' => $attrs['companyName'],
+            'company_name' => $attrs['companyName'],
             'pib' => $attrs['pib'],
-            'registrationNumber' => $attrs['registrationNumber'],
+            'registration_number' => $attrs['registrationNumber'],
             'industry' => $attrs['industry'],
             'registration' => $attrs['registration'],
-            'phoneNumber' => $attrs['phoneNumber'],
+            'phone_number' => $attrs['phoneNumber'],
             'country' => $attrs['country'],
             'city' => $attrs['city'],
-            'postalCode' => $attrs['postalCode'],
-            'companyAddress' => $attrs['companyAddress'],
-            'ownerName' => $attrs['ownerName'],
-            'ownerLastName' => $attrs['ownerLastName'],
-            'companySize' => $attrs['companySize'],
+            'postal_code' => $attrs['postalCode'],
+            'company_address' => $attrs['companyAddress'],
+            'owner_name' => $attrs['ownerName'],
+            'owner_last_name' => $attrs['ownerLastName'],
+            'company_size' => $attrs['companySize'],
         ]);
         $user = User::create([
             'email' => $attrs['email'],
