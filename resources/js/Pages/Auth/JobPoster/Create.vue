@@ -15,15 +15,24 @@
                     />
                 </div>
                 <BaseInput label="PIB" v-model="form.pib" :error="form.errors.pib" />
-                <BaseInput label="Matični broj" v-model="form.registrationNumber" :error="form.errors.registrationNumber" />
-                <BaseSelect filter name="Industrija" v-model="form.industry" label="Industry" required :options="$page.props.industries" />
+                <BaseInput label="Matični broj" v-model.trim="form.registrationNumber" :error="form.errors.registrationNumber" />
+                <BaseSelect
+                    :error="form.errors.industry"
+                    filter
+                    name="Industrija"
+                    v-model="form.industry"
+                    label="Industry"
+                    required
+                    :options="$page.props.industries"
+                />
                 <BaseInput label="Telefon" v-model="form.phoneNumber" :error="form.errors.phoneNumber" />
-                <BaseInput label="Država" v-model="form.country" :error="form.errors.coutry" />
+                <BaseInput label="Država" v-model="form.country" :error="form.errors.country" />
                 <BaseInput label="Poštanski broj" v-model="form.postalCode" :error="form.errors.postalCode" />
                 <BaseSelect filter name="city" label="Grad" v-model="form.city" :error="form.errors.city" :options="$page.props.cities" />
                 <BaseInput label="Adresa kompanije" v-model="form.companyAddress" :error="form.errors.companyAddress" />
                 <p class="text-xl text-primary font-bold">Dodatne informacije</p>
                 <BaseSelect
+                    :error="form.errors.companySize"
                     name="Veličina kompanije"
                     v-model.number="form.companySize"
                     label="Odaberite veličinu kompanije"
@@ -36,7 +45,7 @@
                 <p class="text-xl text-primary font-bold">Podaci za pristup</p>
                 <BaseInput label="Email" v-model="form.email" :error="form.errors.email" />
                 <BaseInput label="Šifra" v-model="form.password" :error="form.errors.password" />
-                <BaseInput label="Ponovi šifru" v-model="form.confirmed" :error="form.errors.confirmed" />
+                <BaseInput label="Ponovi šifru" v-model="form.password_confirmation" :error="form.errors.password_confirmation" />
                 <BaseButton :loading="form.processing" type="submit" class="w-full">Submit</BaseButton>
             </form>
         </div>
@@ -70,7 +79,7 @@ const form = useForm({
     companySize: '',
     email: '',
     password: '',
-    confirmed: ''
+    password_confirmation: ''
 })
 
 const register = () => {

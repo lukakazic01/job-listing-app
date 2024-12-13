@@ -50,6 +50,6 @@ class User extends Authenticatable
     }
 
     public function profilable(): MorphTo {
-        return $this->morphTo();
+        return $this->morphTo('profilable');
     }
 }

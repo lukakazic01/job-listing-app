@@ -59,12 +59,12 @@ const [value, modifiers] = defineModel<number | string | null, 'number'>({
 })
 </script>
 
-<style scoped>
+<style>
 .loading {
     @apply cursor-not-allowed relative text-white;
 
     &:before {
-        @apply animate-spin content-[''] z-50 inset-0 absolute w-6 h-6 m-auto border-4 border-transparent border-t-primary rounded-full;
+        @apply content-[''] z-50 inset-0 absolute w-6 h-6 m-auto border-4 border-t-primary rounded-full animate-spin;
     }
 }
 </style>

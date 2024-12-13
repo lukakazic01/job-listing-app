@@ -17,11 +17,11 @@ class JobPosterRegisterController extends Controller
     public function store(Request $request) {
         $attrs = $request->validate([
             'companyName' => ['required', 'string'],
-            'pib' => ['required', 'string'],
-            'registrationNumber' => ['required', 'string'],
+            'pib' => ['required', 'string', 'unique:job_posters', 'size:13'],
+            'registrationNumber' => ['required', 'string', 'unique:job_posters,registration_number', 'size:8'],
             'industry' => ['required', 'numeric'],
             'registration' => ['required', 'string'],
-            'phoneNumber' => ['required', 'string'],
+            'phoneNumber' => ['required', 'string', 'unique:job_posters,phone_number', 'min:8', 'max:13'],
             'country' => ['required', 'string'],
             'city' => ['required', 'numeric'],
             'postalCode' => ['required', 'string'],
@@ -36,22 +36,23 @@ class JobPosterRegisterController extends Controller
             'company_name' => $attrs['companyName'],
             'pib' => $attrs['pib'],
             'registration_number' => $attrs['registrationNumber'],
-            'industry' => $attrs['industry'],
+            'industry_id' => $attrs['industry'],
             'registration' => $attrs['registration'],
             'phone_number' => $attrs['phoneNumber'],
             'country' => $attrs['country'],
-            'city' => $attrs['city'],
+            'city_id' => $attrs['city'],
             'postal_code' => $attrs['postalCode'],
             'company_address' => $attrs['companyAddress'],
             'owner_name' => $attrs['ownerName'],
             'owner_last_name' => $attrs['ownerLastName'],
-            'company_size' => $attrs['companySize'],
+            'company_size_id' => $attrs['companySize'],
         ]);
         $user = User::create([
             'email' => $attrs['email'],
             'password' => $attrs['password'],
             'profilable_id' => $jobPoster->id,
-            'pofilable_type' => JobPoster::class,
+            'profilable_type' => JobPoster::class,
+            'role' => 'job-poster',
         ]);
 
         auth()->login($user);

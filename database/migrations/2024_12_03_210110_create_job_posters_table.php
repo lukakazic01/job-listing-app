@@ -15,17 +15,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('job_posters', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('company_name');
-            $table->string('pib');
-            $table->string('registration_number');
+            $table->string('pib', 13)->unique();
+            $table->string('registration_number', 8)->unique();
             $table->foreignIdFor(Industry::class)->constrained();
             $table->string('registration');
-            $table->string('phone_number');
+            $table->string('phone_number', 20)->unique();
             $table->string('country');
             $table->foreignIdFor(City::class)->constrained();;
             $table->string('postal_code');
-            $table->string('phone_number');
             $table->string('company_address');
             $table->string('owner_name');
             $table->string('owner_last_name');
